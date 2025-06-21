@@ -1,8 +1,7 @@
-import { supabase, createServerClient } from './supabase'
-import type { User, Course, LearningPath, Enrollment } from '../types'
+import { supabase } from './supabase'
 
 export class UserService {
-  static async getProfile(userId: string): Promise<User | null> {
+  static async getProfile(userId: string) {
     const { data, error } = await supabase
       .from('profiles')
       .select('*')
@@ -14,10 +13,10 @@ export class UserService {
       return null
     }
 
-    return data as User
+    return data
   }
 
-  static async getUsers(role?: string): Promise<User[]> {
+  static async getUsers(role?: string) {
     let query = supabase.from('profiles').select('*')
     
     if (role) {
@@ -31,12 +30,12 @@ export class UserService {
       return []
     }
 
-    return data as User[]
+    return data
   }
 }
 
 export class CourseService {
-  static async getCourses(): Promise<Course[]> {
+  static async getCourses() {
     const { data, error } = await supabase
       .from('courses')
       .select('*')
@@ -47,10 +46,10 @@ export class CourseService {
       return []
     }
 
-    return data as Course[]
+    return data
   }
 
-  static async getCourse(courseId: string): Promise<Course | null> {
+  static async getCourse(courseId: string) {
     const { data, error } = await supabase
       .from('courses')
       .select('*')
@@ -62,12 +61,12 @@ export class CourseService {
       return null
     }
 
-    return data as Course
+    return data
   }
 }
 
 export class PathService {
-  static async getPaths(): Promise<LearningPath[]> {
+  static async getPaths() {
     const { data, error } = await supabase
       .from('learning_paths')
       .select('*')
@@ -79,12 +78,12 @@ export class PathService {
       return []
     }
 
-    return data as LearningPath[]
+    return data
   }
 }
 
 export class EnrollmentService {
-  static async enrollStudent(studentId: string, pathId: string): Promise<Enrollment | null> {
+  static async enrollStudent(studentId: string, pathId: string) {
     const { data, error } = await supabase
       .from('enrollments')
       .insert({
@@ -100,6 +99,6 @@ export class EnrollmentService {
       return null
     }
 
-    return data as Enrollment
+    return data
   }
 }
